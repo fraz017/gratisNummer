@@ -13,5 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap.min
+//= require jquery.dataTables.min
+//= require dataTables.bootstrap.min
+//= require fastclick.min
+//= require jquery.slimscroll.min
+//= require icheck.min
 //= require jquery.remotipart
-//= require_tree .
