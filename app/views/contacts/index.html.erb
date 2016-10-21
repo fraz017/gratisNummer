@@ -31,7 +31,7 @@
               <tr>
                 <td><%= contact.name %></td>
                 <td><%= contact.number %></td>
-                <td><%=image_tag contact.logo.url(:thumb) %></td>
+                <td><%=image_tag contact.logo.url(:thumb), width: "100px" %></td>
                 <td>
                 <%= link_to 'Edit', edit_contact_path(contact), class: "btn btn-xs btn-warning", "data-toggle": "modal", "data-target": "#contact", remote: true%>
                 <%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %></td>
