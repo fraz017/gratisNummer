@@ -1,7 +1,8 @@
-<%= form_for(contact) do |f| %>
+<%= form_for(contact, :remote => true, :html => { :multipart => true }) do |f| %>
   <% if contact.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+    <div id="error_explanation" class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <h2>Error!</h2>
 
       <ul>
       <% contact.errors.full_messages.each do |message| %>
@@ -10,18 +11,40 @@
       </ul>
     </div>
   <% end %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <div class="box-body">
+    <div class="form-group">
+      <label>Name</label>
+      <%= f.text_field :name, :class=> "form-control", :placeholder=>"Name" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
+    <div class="form-group">
+      <label>Number</label>
+      <%= f.text_field :number, :class=> "form-control", :placeholder=>"Number" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :number %>
-    <%= f.text_field :number %>
-  </div>
+    <div class="form-group">
+      <label>Logo</label>
+      <%= f.file_field :logo%>
+    </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <label style="margin-right:5px;">Works for telenor</label>
+      <%= f.check_box :is_working, :class=> "form-control" %>
+    </div>
+    
+    <div class="actions">
+      <%= f.submit nil, class: "btn btn-primary" %>
+    </div>
+  <%end%>
+
+
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>

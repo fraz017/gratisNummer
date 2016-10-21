@@ -1,29 +1,69 @@
-<p id="notice"><%= notice %></p>
+<section class="content-header">
+  <h1>
+    Dashboard
+    <small>Contacts</small>
+  </h1>
+</section>
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Listing Contacts</h3>
+          <div class="box-tools">
+            <div class="input-group">
+              <%= link_to '<i class="fa fa-plus"></i> Add Contact'.html_safe, "#", class: "btn btn-success", "data-toggle": "modal", "data-target": "#myModal" %>
+            </div>
+          </div>
+        </div><!-- /.box-header -->
+        <br>
 
-<h1>Contacts</h1>
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover table-bordered">
+            <tbody><tr>
+              <th>Name</th>
+              <th>Number</th>
+              <th>Logo</th>
+              <th>Actions</th>
+            </tr>
+            <%@contacts.each do |contact|%>
+              <tr>
+                <td><%= contact.name %></td>
+                <td><%= contact.number %></td>
+                <td><%=image_tag contact.logo.url(:thumb) %></td>
+                <td>
+                <%= link_to 'Edit', "#", class: "btn btn-xs btn-warning" %>
+                <%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %></td>
+              </tr>
+            <%end%>
+            <%if @contacts.count < 1%>
+            <tr>
+              <td colspan="4" class="box-title"><h3>You don not have any Contacts yet. Add some</h3></td>
+            </tr>
+            <%end%>
+          </tbody></table>
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
+    </div>
+  </div>
+</section>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Number</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
-  <tbody>
-    <% @contacts.each do |contact| %>
-      <tr>
-        <td><%= contact.name %></td>
-        <td><%= contact.number %></td>
-        <td><%= link_to 'Show', contact %></td>
-        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Contact</h4>
+      </div>
+      <div class="modal-body newForm">
+        <%= render "form", contact: @contact %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
 
-<br>
-
-<%= link_to 'New Contact', new_contact_path %>
+  </div>
+</div>
