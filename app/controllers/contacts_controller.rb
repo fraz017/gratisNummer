@@ -17,10 +17,16 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /contacts/1/edit
   def edit
+    respond_to do |format|
+      format.js
+    end
   end
 
   # POST /contacts
@@ -29,21 +35,16 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
     @contact.save
     respond_to do |format|
-      format.js {}
+      format.js
     end
   end
 
   # PATCH/PUT /contacts/1
   # PATCH/PUT /contacts/1.json
   def update
+    @contact.update(contact_params)
     respond_to do |format|
-      if @contact.update(contact_params)
-        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
-        format.json { render :show, status: :ok, location: @contact }
-      else
-        format.html { render :edit }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
-      end
+      format.js
     end
   end
 

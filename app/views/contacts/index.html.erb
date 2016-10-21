@@ -12,7 +12,7 @@
           <h3 class="box-title">Listing Contacts</h3>
           <div class="box-tools">
             <div class="input-group">
-              <%= link_to '<i class="fa fa-plus"></i> Add Contact'.html_safe, "#", class: "btn btn-success", "data-toggle": "modal", "data-target": "#myModal" %>
+              <%= link_to '<i class="fa fa-plus"></i> Add Contact'.html_safe, new_contact_path, class: "btn btn-success", "data-toggle": "modal", "data-target": "#contact", remote: true%>
             </div>
           </div>
         </div><!-- /.box-header -->
@@ -32,7 +32,7 @@
                 <td><%= contact.number %></td>
                 <td><%=image_tag contact.logo.url(:thumb) %></td>
                 <td>
-                <%= link_to 'Edit', "#", class: "btn btn-xs btn-warning" %>
+                <%= link_to 'Edit', edit_contact_path(contact), class: "btn btn-xs btn-warning", "data-toggle": "modal", "data-target": "#contact", remote: true%>
                 <%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %></td>
               </tr>
             <%end%>
@@ -48,17 +48,18 @@
   </div>
 </section>
 
-<div id="myModal" class="modal fade" role="dialog">
+
+<div id="contact" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add Contact</h4>
+        <h4 class="modal-title">Edit Contact</h4>
       </div>
-      <div class="modal-body newForm">
-        <%= render "form", contact: @contact %>
+      <div class="modal-body form">
+        <p>Hello World</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
