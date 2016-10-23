@@ -82,7 +82,8 @@ Rails.application.configure do
   end
 
   Paperclip.options.merge!(:command_path => "/usr/bin")
-
+  config.i18n.available_locales = [:en, :nn]
+  config.i18n.default_locale = :nn
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end

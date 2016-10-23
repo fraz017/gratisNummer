@@ -1,0 +1,84 @@
+<section class="content-header">
+  <h1>
+    Dashbord
+    <small>Kontakt</small>
+  </h1>
+</section>
+<section class="content">
+  <div class="box">
+    <div class="box-header">
+      <h3 class="box-title">Notering Kontakt</h3>
+      <div class="box-tools">
+        <div class="input-group">
+          <%= link_to '<i class="fa fa-plus"></i> Legg til Kontakt'.html_safe, new_contact_path, class: "btn btn-success", "data-toggle": "modal", "data-target": "#contact", remote: true%>
+        </div>
+      </div>
+    </div><!-- /.box-header -->
+    <br>
+
+    <div class="box-body table-responsive">
+      <div class="row">
+        <div class="col-sm-12">
+          <table class="table table-hover table-bordered" id="contacts">
+            <thead>
+              <th>Navn</th>
+              <th>Antall</th>
+              <th>Logo</th>
+              <th>Handlinger</th>
+            </thead>
+            <tbody>
+            <%@contacts.each do |contact|%>
+              <tr>
+                <td><%= contact.name %></td>
+                <td><%= contact.number %></td>
+                <td><%=image_tag contact.logo.url(:thumb), width: "100px" %></td>
+                <td>
+                <%= link_to 'Redigere', edit_contact_path(contact), class: "btn btn-xs btn-warning", "data-toggle": "modal", "data-target": "#contact", remote: true%>
+                <%= link_to 'Ødelegge', contact, method: :delete, data: { confirm: 'Er du sikker?' }, class: "btn btn-xs btn-danger" %></td>
+              </tr>
+            <%end%>
+          </tbody></table>
+        </div>
+      </div>
+    </div><!-- /.box-body -->
+  </div><!-- /.box -->
+</section>
+
+
+<div id="contact" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Rediger Kontakt</h4>
+      </div>
+      <div class="modal-body form">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Kansellere</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $(function () {
+    $("#contacts").DataTable({
+      "language": {
+        "lengthMenu": "Vise _MENU_ oppføringer per side",
+        "emptyTable": "Ingen kontakter tilgjengelige",
+        "search": "Søke", 
+        "infoEmpty": "Viser 0 til 0 av _PAGES_ oppføringer",
+        "info": "Viser _START_ til _END_ av _TOTAL_ oppføringer",
+        "paginate": {
+          "previous": "Tidligere",
+          "next": "Neste"
+        }
+      }
+    });
+  });
+</script>

@@ -1,0 +1,53 @@
+<%= form_for(contact, :remote => true, :html => { :multipart => true }) do |f| %>
+  <% if contact.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <h2>Feil!</h2>
+
+      <ul>
+      <% contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <div class="box-body">
+    <div class="form-group">
+      <label>Navn</label>
+      <%= f.text_field :name, :class=> "form-control", :placeholder=>"Navn" %>
+    </div>
+
+    <div class="form-group">
+      <label>Antall</label>
+      <%= f.text_field :number, :class=> "form-control", :placeholder=>"Antall" %>
+    </div>
+
+    <div class="form-group">
+      <label>Logo</label>
+      <%if contact.logo_file_name.present? %>
+        <%= image_tag contact.logo.url(:thumb) %>
+      <%end%>
+      <%= f.file_field :logo %>
+    </div>
+
+    <div class="form-group">
+      <label style="margin-right:5px;">Arbeider for telenor</label>
+      <%= f.check_box :is_working, :class=> "form-control" %>
+    </div>
+    
+    <div class="actions">
+      <%= f.submit "Oppdatere Kontaktinformasjon", class: "btn btn-primary" %>
+    </div>
+  <%end%>
+
+
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>
