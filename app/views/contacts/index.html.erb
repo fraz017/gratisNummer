@@ -37,11 +37,6 @@
                 <%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %></td>
               </tr>
             <%end%>
-            <%if @contacts.count < 1%>
-            <tr>
-              <td colspan="4" class="box-title"><h3>You don not have any Contacts yet. Add some</h3></td>
-            </tr>
-            <%end%>
           </tbody></table>
         </div>
       </div>
@@ -72,6 +67,10 @@
 
 <script>
   $(function () {
-    $("#contacts").DataTable();
+    $("#contacts").DataTable({
+      "language": {
+        "emptyTable": "No contacts available"
+      }
+    });
   });
 </script>
