@@ -28,6 +28,11 @@ gem "paperclip", "~> 5.0.0"
 gem 'devise'
 
 gem 'remotipart', '~> 1.2'
+
+gem 'capistrano'
+gem 'capistrano-bundler'
+gem 'capistrano-rails'
+gem 'capistrano-passenger'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
