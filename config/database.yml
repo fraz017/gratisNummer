@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: gratis-backend_production
-  username: gratis-backend
-  password: <%= ENV['GRATIS-BACKEND_DATABASE_PASSWORD'] %>
+  database: gratis_production
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
